@@ -1,0 +1,51 @@
+---
+const navItems = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'Categories', href: '/categories/clean-beauty' },
+  { label: 'Start Here', href: '/start-here' },
+  { label: 'About', href: '/about' },
+  { label: 'Free Guides', href: '/free' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-[var(--cream)]/95 backdrop-blur-sm border-b border-[var(--sage-soft)]">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-[var(--space-5)] py-[var(--space-4)]" aria-label="Main navigation">
+    <a href="/" class="flex items-center gap-1 no-underline" aria-label="healthwelltech21 home">
+      <span class="font-[var(--font-display)] text-[var(--sage-deep)] text-xl font-[320] tracking-[-0.03em]">healthwelltech</span><span class="font-[var(--font-body)] text-[var(--sage-deep)] text-xs font-medium relative top-[-4px] ml-1 border-b border-[var(--sage-deep)]">21</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-[var(--space-6)] list-none m-0 p-0">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href} class="text-[var(--charcoal)] no-underline text-[15px] font-medium hover:text-[var(--sage-deep)] transition-colors duration-[var(--duration-default)]">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button class="md:hidden p-2 text-[var(--sage-deep)]" aria-label="Open menu" id="mobile-menu-toggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-[var(--sage-soft)] bg-[var(--cream)] px-[var(--space-5)] py-[var(--space-5)]">
+    <ul class="list-none m-0 p-0 space-y-[var(--space-4)]">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href} class="text-[var(--charcoal)] no-underline text-base font-medium block py-1">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <script is:inline>
+    document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+  </script>
+</header>

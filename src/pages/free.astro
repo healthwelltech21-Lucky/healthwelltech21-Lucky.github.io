@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+---
+
+<BaseLayout title="Free Guides" description="Download free PDF guides: The Endo-Friendly Anti-Inflammatory Pantry Checklist and the Clean Beauty Swap Cheat Sheet.">
+  <Header slot="header" />
+
+  <section class="free-page">
+    <div class="free-page__container">
+      <h1 class="free-page__title">Free Guides</h1>
+      <p class="free-page__intro">Practical, printable resources to help you make cleaner choices without overthinking it. Subscribe below to get instant access.</p>
+
+      <!-- Lead Magnet 1 -->
+      <div class="free-page__magnet">
+        <div class="free-page__magnet-content">
+          <span class="free-page__badge">4-page PDF</span>
+          <h2 class="free-page__magnet-title">The Endo-Friendly Anti-Inflammatory Pantry Checklist</h2>
+          <p class="free-page__magnet-desc">28 grocery staples under $20 that support hormone balance and reduce inflammation — organized by category so you can take it straight to the store.</p>
+
+          <h3 class="free-page__whats-inside">What's inside:</h3>
+          <ul class="free-page__benefits">
+            <li>28 anti-inflammatory staples organized by aisle</li>
+            <li>Why each item matters for endo (backed by research)</li>
+            <li>Budget-friendly brands I personally buy</li>
+            <li>A fridge-friendly format you can print and reference weekly</li>
+          </ul>
+
+          <Newsletter />
+        </div>
+      </div>
+
+      <!-- Lead Magnet 2 -->
+      <div class="free-page__magnet">
+        <div class="free-page__magnet-content">
+          <span class="free-page__badge">Cheat Sheet</span>
+          <h2 class="free-page__magnet-title">Clean Beauty Swap Cheat Sheet</h2>
+          <p class="free-page__magnet-desc">The 12 most common toxic ingredients hiding in your skincare and makeup — plus the clean alternatives I actually use and love.</p>
+
+          <h3 class="free-page__whats-inside">What's inside:</h3>
+          <ul class="free-page__benefits">
+            <li>12 toxic ingredients to look for on labels (with what they do)</li>
+            <li>Clean product alternatives for each one</li>
+            <li>Drugstore and prestige options at every price point</li>
+            <li>QR codes linking to full reviews on this blog</li>
+          </ul>
+
+          <Newsletter />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .free-page {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .free-page__container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .free-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-4) 0;
+    text-align: center;
+  }
+
+  .free-page__intro {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    text-align: center;
+    margin: 0 0 var(--space-8) 0;
+  }
+
+  .free-page__magnet {
+    border: 1px solid var(--sage-soft);
+    border-radius: 8px;
+    background: var(--ivory);
+    padding: var(--space-7);
+    margin-bottom: var(--space-7);
+  }
+
+  .free-page__badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ivory);
+    background: var(--terracotta);
+    padding: var(--space-1) var(--space-3);
+    border-radius: 4px;
+    margin-bottom: var(--space-3);
+  }
+
+  .free-page__magnet-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .free-page__magnet-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-5) 0;
+  }
+
+  .free-page__whats-inside {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--stone);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .free-page__benefits {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    padding-left: var(--space-5);
+    margin: 0 0 var(--space-6) 0;
+  }
+
+  .free-page__benefits li {
+    margin-bottom: var(--space-2);
+  }
+
+  @media (max-width: 768px) {
+    .free-page {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .free-page__magnet {
+      padding: var(--space-5);
+    }
+  }
+</style>

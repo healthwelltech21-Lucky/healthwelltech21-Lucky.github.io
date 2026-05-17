@@ -1,0 +1,233 @@
+---
+interface Props {
+  name: string;
+  image: string;
+  asin: string;
+  rating: number;
+  price: string;
+  whyILoveIt: string;
+  pros?: string[];
+  cons?: string[];
+}
+
+const { name, image, asin, rating, price, whyILoveIt, pros = [], cons = [] } = Astro.props;
+
+const affiliateUrl = `https://www.amazon.com/dp/${asin}?tag=healthwelltech21-20`;
+const fullStars = Math.floor(rating);
+const emptyStars = 5 - fullStars;
+---
+
+<div class="product-card">
+  <div class="product-card__layout">
+    <div class="product-card__image-wrapper">
+      <img src={image} alt={name} class="product-card__image" loading="lazy" />
+    </div>
+    <div class="product-card__details">
+      <h3 class="product-card__name">{name}</h3>
+
+      <div class="product-card__rating" aria-label={`Rating: ${rating} out of 5 stars`}>
+        {Array.from({ length: fullStars }).map(() => (
+          <svg class="product-card__star product-card__star--filled" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        ))}
+        {Array.from({ length: emptyStars }).map(() => (
+          <svg class="product-card__star product-card__star--empty" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        ))}
+        <span class="product-card__rating-text">{rating} / 5</span>
+      </div>
+
+      <p class="product-card__price">{price}</p>
+
+      <div class="product-card__why">
+        <p><em>{whyILoveIt}</em></p>
+      </div>
+
+      {pros.length > 0 && (
+        <ul class="product-card__pros">
+          {pros.map((pro) => (
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A6B4E" stroke-width="3" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {pro}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {cons.length > 0 && (
+        <ul class="product-card__cons">
+          {cons.map((con) => (
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8654A" stroke-width="3" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              {con}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <a
+        href={affiliateUrl}
+        class="product-card__cta"
+        rel="nofollow sponsored noopener"
+        target="_blank"
+      >
+        Check Price on Amazon
+        <span class="sr-only">(opens Amazon in new tab)</span>
+      </a>
+      <p class="product-card__disclosure">Affiliate link — I earn a small commission at no cost to you</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-card {
+    border: 1px solid var(--sage-soft);
+    border-radius: 8px;
+    background: var(--ivory);
+    padding: var(--space-6);
+    margin-bottom: var(--space-5);
+  }
+
+  .product-card__layout {
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  @media (max-width: 640px) {
+    .product-card__layout {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .product-card__image-wrapper {
+    flex-shrink: 0;
+    width: 120px;
+  }
+
+  .product-card__image {
+    width: 120px;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .product-card__details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .product-card__name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .product-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: var(--space-2);
+  }
+
+  .product-card__star--filled {
+    color: var(--terracotta);
+  }
+
+  .product-card__star--empty {
+    color: var(--stone);
+  }
+
+  .product-card__rating-text {
+    margin-left: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--stone);
+  }
+
+  .product-card__price {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--sage-deep);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .product-card__why {
+    margin-bottom: var(--space-3);
+  }
+
+  .product-card__why p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin: 0;
+  }
+
+  .product-card__pros,
+  .product-card__cons {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .product-card__pros li,
+  .product-card__cons li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    padding: var(--space-1) 0;
+  }
+
+  .product-card__cta {
+    display: inline-block;
+    background: var(--terracotta);
+    color: var(--ivory);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 4px;
+    transition: opacity var(--duration-default) var(--ease-default);
+  }
+
+  .product-card__cta:hover {
+    opacity: 0.9;
+  }
+
+  .product-card__disclosure {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--stone);
+    font-style: italic;
+    margin: var(--space-2) 0 0 0;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+interface Props {
+  rating: number;
+  label: string;
+}
+
+const { rating, label } = Astro.props;
+---
+
+<span class="rating-badge" aria-label={`${rating} out of 5 — ${label}`}>
+  <svg class="rating-badge__star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+  <span class="rating-badge__text">{rating} / 5 — {label}</span>
+</span>
+
+<style>
+  .rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--sage-whisper);
+    border: 1px solid var(--sage-soft);
+    border-radius: 9999px;
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .rating-badge__star {
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  .rating-badge__text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+</style>

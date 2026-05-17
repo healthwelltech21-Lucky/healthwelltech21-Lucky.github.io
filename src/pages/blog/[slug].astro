@@ -1,0 +1,363 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import JumpToPick from '../../components/JumpToPick.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import PinterestSaveButton from '../../components/PinterestSaveButton.astro';
+import SocialShare from '../../components/SocialShare.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const relatedPosts = allPosts
+  .filter((p) => p.data.category === post.data.category && p.id !== post.id)
+  .sort((a, b) => new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime())
+  .slice(0, 3);
+
+const categorySlug = post.data.category.toLowerCase().replace(/\s+/g, '-');
+const postUrl = `${Astro.site || ''}blog/${post.id}/`;
+const updatedDate = post.data.updatedDate || post.data.publishedDate;
+const formattedDate = new Date(updatedDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.heroImage,
+  author: {
+    '@type': 'Person',
+    name: 'Lucky',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'healthwelltech21',
+  },
+  datePublished: post.data.publishedDate,
+  dateModified: updatedDate,
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={post.data.heroImage}
+  ogType="article"
+  publishedTime={post.data.publishedDate}
+  author="Lucky"
+>
+  <Header slot="header" />
+
+  <article class="post">
+    <div class="post__container">
+      <!-- Breadcrumb -->
+      <nav class="post__breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href={`/categories/${categorySlug}`}>{post.data.category}</a></li>
+          <li aria-current="page">{post.data.title}</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header class="post__header">
+        <span class="post__eyebrow">{post.data.category}</span>
+        <h1 class="post__title">{post.data.title}</h1>
+        <div class="post__meta">
+          By Lucky &middot; Last updated {formattedDate} &middot; {post.data.readingTime} min read
+          {post.data.rating && <span>&middot; &#11088; {post.data.rating}/5</span>}
+        </div>
+      </header>
+
+      <!-- Affiliate Disclosure -->
+      <AffiliateDisclosure />
+
+      <!-- Hero Image -->
+      <div class="post__hero">
+        <img
+          src={post.data.heroImage}
+          alt={post.data.heroAlt}
+          class="post__hero-image"
+          width="1600"
+          height="2000"
+          loading="eager"
+        />
+      </div>
+
+      <!-- Jump to Pick -->
+      <div class="post__jump">
+        <JumpToPick anchor="top-pick" />
+      </div>
+
+      <!-- Content Layout -->
+      <div class="post__layout">
+        <aside class="post__sidebar">
+          <TableOfContents headings={headings} />
+        </aside>
+
+        <div class="post__body prose">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Social Share -->
+      <div class="post__share">
+        <SocialShare url={postUrl} title={post.data.title} image={post.data.heroImage} />
+      </div>
+
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <section class="post__related">
+          <h2 class="post__related-heading">Keep reading</h2>
+          <div class="post__related-grid">
+            {relatedPosts.map((related) => (
+              <PostCard
+                title={related.data.title}
+                slug={related.id}
+                category={related.data.category}
+                excerpt={related.data.description}
+                date={related.data.publishedDate}
+                heroImage={related.data.heroImage}
+                heroAlt={related.data.heroAlt}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Newsletter -->
+      <Newsletter />
+
+      <!-- Pinterest Save -->
+      <PinterestSaveButton
+        url={postUrl}
+        image={post.data.heroImage}
+        description={post.data.title}
+      />
+    </div>
+  </article>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .post {
+    padding: var(--space-7) var(--space-5);
+  }
+
+  .post__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .post__breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-5) 0;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--stone);
+    gap: var(--space-1);
+  }
+
+  .post__breadcrumb li:not(:last-child)::after {
+    content: '>';
+    margin-left: var(--space-1);
+  }
+
+  .post__breadcrumb a {
+    color: var(--stone);
+    text-decoration: none;
+  }
+
+  .post__breadcrumb a:hover {
+    color: var(--terracotta);
+  }
+
+  .post__header {
+    margin-bottom: var(--space-5);
+  }
+
+  .post__eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--terracotta);
+    margin-bottom: var(--space-3);
+  }
+
+  .post__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-4) 0;
+    line-height: 1.2;
+  }
+
+  .post__meta {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--stone);
+    line-height: 1.6;
+  }
+
+  .post__hero {
+    margin-bottom: var(--space-5);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .post__hero-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+  }
+
+  .post__jump {
+    margin-bottom: var(--space-6);
+  }
+
+  .post__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 1024px) {
+    .post__container {
+      max-width: 1100px;
+    }
+
+    .post__layout {
+      grid-template-columns: 220px 1fr;
+    }
+  }
+
+  .post__sidebar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .post__sidebar {
+      display: block;
+    }
+  }
+
+  .post__body {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+  }
+
+  .post__body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--space-7) 0 var(--space-4) 0;
+  }
+
+  .post__body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--space-6) 0 var(--space-3) 0;
+  }
+
+  .post__body :global(p) {
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .post__body :global(ul),
+  .post__body :global(ol) {
+    margin: 0 0 var(--space-4) 0;
+    padding-left: var(--space-5);
+  }
+
+  .post__body :global(li) {
+    margin-bottom: var(--space-2);
+  }
+
+  .post__body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: var(--space-5) 0;
+  }
+
+  .post__body :global(blockquote) {
+    border-left: 3px solid var(--sage-deep);
+    padding-left: var(--space-4);
+    margin: var(--space-5) 0;
+    font-style: italic;
+    color: var(--stone);
+  }
+
+  .post__share {
+    margin: var(--space-7) 0;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--sage-soft);
+  }
+
+  .post__related {
+    margin-top: var(--space-8);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--sage-soft);
+  }
+
+  .post__related-heading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-5) 0;
+  }
+
+  .post__related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  @media (max-width: 768px) {
+    .post {
+      padding: var(--space-5) var(--space-4);
+    }
+
+    .post__related-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+  }
+</style>

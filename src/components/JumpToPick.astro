@@ -1,0 +1,27 @@
+---
+interface Props {
+  anchor: string;
+  label?: string;
+}
+
+const { anchor, label = 'Jump to my top pick →' } = Astro.props;
+---
+
+<a href={`#${anchor}`} class="jump-to-pick">{label}</a>
+
+<style>
+  .jump-to-pick {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--terracotta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    scroll-behavior: smooth;
+    transition: opacity var(--duration-default) var(--ease-default);
+  }
+
+  .jump-to-pick:hover {
+    opacity: 0.8;
+  }
+</style>

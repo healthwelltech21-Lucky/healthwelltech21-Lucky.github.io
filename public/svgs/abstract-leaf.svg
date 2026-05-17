@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="80" height="100" aria-hidden="true" role="presentation">
+  <path d="M40 90 C40 90 40 70 40 50 C40 30 38 15 40 10" fill="none" stroke="#8FA37F" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M40 10 C40 10 20 15 15 35 C10 55 20 70 40 75 C60 70 70 55 65 35 C60 15 40 10 40 10Z" fill="#C8D2BC" fill-opacity="0.25" stroke="#8FA37F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M40 15 C38 25 36 40 40 75" fill="none" stroke="#8FA37F" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  <path d="M40 30 C35 32 28 36 22 40" fill="none" stroke="#8FA37F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+  <path d="M40 42 C35 44 27 48 20 52" fill="none" stroke="#8FA37F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+  <path d="M40 55 C36 57 30 60 25 62" fill="none" stroke="#8FA37F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+  <path d="M40 30 C45 32 52 36 58 40" fill="none" stroke="#8FA37F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+  <path d="M40 42 C45 44 53 48 60 52" fill="none" stroke="#8FA37F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+  <path d="M40 55 C44 57 50 60 55 62" fill="none" stroke="#8FA37F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+</svg>

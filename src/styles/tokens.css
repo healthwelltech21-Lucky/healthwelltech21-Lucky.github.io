@@ -1,0 +1,53 @@
+:root {
+  /* Brand */
+  --sage-deep:    #5A6B4E;
+  --sage-mid:     #8FA37F;
+  --sage-soft:    #C8D2BC;
+  --sage-whisper: #E4EADD;
+  --cream:        #F5F1E8;
+  --ivory:        #FBF8F1;
+  --terracotta:   #B8654A;
+  --clay:         #E8C9B5;
+  --charcoal:     #2D2A26;
+  --stone:        #6F6A62;
+  --ink:          #1A1815;
+
+  /* Interaction states */
+  --sage-deep-hover:    #4A5A40;
+  --sage-deep-active:   #3D4A35;
+  --sage-deep-disabled: #C2C8BB;
+  --terracotta-hover:   #A1543D;
+  --terracotta-active:  #8B4632;
+  --focus-ring:         #B8654A;
+
+  /* Spacing — 4px modular scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 160px;
+
+  /* Typography */
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Geist', sans-serif;
+
+  /* Motion */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-default: 400ms;
+  --duration-page: 600ms;
+  --duration-image: 800ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-default: 200ms;
+    --duration-page: 200ms;
+    --duration-image: 200ms;
+  }
+}

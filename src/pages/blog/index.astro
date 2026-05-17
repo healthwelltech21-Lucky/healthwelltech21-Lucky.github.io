@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort(
+  (a, b) => new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime()
+);
+
+const categories = ['All', 'Clean Beauty', 'Gentle Wellness', 'Organic Pantry', 'Endo-Friendly Living', 'Slow Living', 'Smart Home'];
+
+function categoryToSlug(cat: string) {
+  return cat.toLowerCase().replace(/\s+/g, '-');
+}
+---
+
+<BaseLayout title="Blog" description="All posts on clean beauty, gentle wellness, organic pantry staples, endo-friendly living, and more.">
+  <Header slot="header" />
+
+  <section class="blog-listing">
+    <div class="blog-listing__container">
+      <h1 class="blog-listing__title">Blog</h1>
+
+      <!-- Category Filters -->
+      <div class="blog-listing__filters" role="group" aria-label="Filter by category">
+        {categories.map((cat) => (
+          <button
+            class:list={['filter-btn', { active: cat === 'All' }]}
+            data-filter={cat === 'All' ? 'all' : categoryToSlug(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="blog-listing__grid">
+        {posts.map((post) => (
+          <div class="blog-listing__item" data-category={categoryToSlug(post.data.category)}>
+            <PostCard
+              title={post.data.title}
+              slug={post.id}
+              category={post.data.category}
+              excerpt={post.data.description}
+              date={post.data.publishedDate}
+              heroImage={post.data.heroImage}
+              heroAlt={post.data.heroAlt}
+            />
+          </div>
+        ))}
+      </div>
+
+      {posts.length === 0 && (
+        <p class="blog-listing__empty">No posts yet. Check back soon!</p>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .blog-listing {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .blog-listing__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog-listing__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-6) 0;
+  }
+
+  .blog-listing__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-7);
+  }
+
+  .filter-btn {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--sage-soft);
+    border-radius: 24px;
+    background: var(--ivory);
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--sage-deep);
+    color: var(--sage-deep);
+  }
+
+  .filter-btn.active {
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
+    color: var(--ivory);
+  }
+
+  .blog-listing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .blog-listing__item[data-hidden] {
+    display: none;
+  }
+
+  .blog-listing__empty {
+    font-family: var(--font-body);
+    color: var(--stone);
+    font-size: 1rem;
+    text-align: center;
+    padding: var(--space-7) 0;
+  }
+
+  @media (max-width: 900px) {
+    .blog-listing__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .blog-listing {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .blog-listing__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.blog-listing__item');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      items.forEach((item) => {
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+          item.removeAttribute('data-hidden');
+        } else {
+          item.setAttribute('data-hidden', '');
+        }
+      });
+    });
+  });
+</script>

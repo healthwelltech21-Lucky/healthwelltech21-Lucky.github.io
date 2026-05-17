@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme {
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Geist', sans-serif;
+  --color-sage-deep: #5A6B4E;
+  --color-sage-mid: #8FA37F;
+  --color-sage-soft: #C8D2BC;
+  --color-sage-whisper: #E4EADD;
+  --color-cream: #F5F1E8;
+  --color-ivory: #FBF8F1;
+  --color-terracotta: #B8654A;
+  --color-clay: #E8C9B5;
+  --color-charcoal: #2D2A26;
+  --color-stone: #6F6A62;
+  --color-ink: #1A1815;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  background-color: var(--cream);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--ink);
+}
+
+h1 {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 320;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(30px, 3.5vw, 40px);
+  font-weight: 360;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--sage-deep);
+}
+
+h3 {
+  font-size: clamp(22px, 2.2vw, 26px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  font-size: clamp(19px, 1.8vw, 21px);
+  font-weight: 350;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+.caption {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  color: var(--stone);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 100;
+  padding: var(--space-3) var(--space-5);
+  background: var(--sage-deep);
+  color: var(--ivory);
+  font-weight: 500;
+  border-radius: 4px;
+  transition: top var(--duration-default) var(--ease-default);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 200ms !important;
+  }
+}

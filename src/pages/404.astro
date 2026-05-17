@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Page Not Found" description="The page you're looking for doesn't exist.">
+  <Header slot="header" />
+
+  <section class="not-found">
+    <div class="not-found__container">
+      <!-- Botanical SVG illustration -->
+      <div class="not-found__illustration" aria-hidden="true">
+        <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stem -->
+          <path d="M60 160 C60 120 55 100 60 80 C65 60 58 40 60 20" stroke="var(--sage-deep)" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Left leaf -->
+          <path d="M60 100 C45 95 30 85 25 70 C20 55 35 55 45 65 C55 75 58 90 60 100" fill="var(--sage-deep)" opacity="0.3"/>
+          <path d="M60 100 C45 95 30 85 25 70" stroke="var(--sage-deep)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Right leaf -->
+          <path d="M60 70 C75 65 90 55 95 40 C100 25 85 25 75 35 C65 45 62 60 60 70" fill="var(--sage-deep)" opacity="0.3"/>
+          <path d="M60 70 C75 65 90 55 95 40" stroke="var(--sage-deep)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Small left leaf -->
+          <path d="M60 55 C50 50 40 42 38 32 C36 22 46 25 52 32 C58 39 59 48 60 55" fill="var(--sage-deep)" opacity="0.2"/>
+          <!-- Bud -->
+          <ellipse cx="60" cy="18" rx="6" ry="10" fill="var(--sage-deep)" opacity="0.4"/>
+          <ellipse cx="60" cy="15" rx="4" ry="7" fill="var(--sage-deep)" opacity="0.2"/>
+        </svg>
+      </div>
+
+      <h1 class="not-found__title">Page not found</h1>
+      <p class="not-found__message">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+
+      <div class="not-found__links">
+        <a href="/" class="not-found__btn not-found__btn--primary">Back to Home</a>
+        <a href="/blog" class="not-found__btn not-found__btn--secondary">Browse the Blog</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: var(--space-9) var(--space-5);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .not-found__container {
+    text-align: center;
+    max-width: 480px;
+  }
+
+  .not-found__illustration {
+    margin-bottom: var(--space-6);
+  }
+
+  .not-found__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .not-found__message {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-6) 0;
+  }
+
+  .not-found__links {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .not-found__btn {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 4px;
+    transition: opacity 200ms ease;
+  }
+
+  .not-found__btn:hover {
+    opacity: 0.9;
+  }
+
+  .not-found__btn--primary {
+    background: var(--sage-deep);
+    color: var(--ivory);
+  }
+
+  .not-found__btn--secondary {
+    background: transparent;
+    color: var(--sage-deep);
+    border: 1px solid var(--sage-deep);
+  }
+
+  @media (max-width: 768px) {
+    .not-found {
+      padding: var(--space-7) var(--space-4);
+    }
+  }
+</style>

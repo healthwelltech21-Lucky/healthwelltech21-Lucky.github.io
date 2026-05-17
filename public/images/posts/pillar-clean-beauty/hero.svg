@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2000">
+  <rect width="1600" height="2000" fill="#E4EADD"/>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C8D2BC"/>
+      <stop offset="100%" stop-color="#E4EADD"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="2000" fill="url(#grad)" opacity="0.5"/>
+  <path d="M600 950 Q700 900 800 950 Q900 1000 1000 950" fill="none" stroke="#8FA37F" stroke-width="1.5" opacity="0.3"/><path d="M600 980 Q700 930 800 980 Q900 1030 1000 980" fill="none" stroke="#8FA37F" stroke-width="1.5" opacity="0.2"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, serif" font-size="32" fill="#5A6B4E" opacity="0.7">Clean Beauty Pillar</text>
+  <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, serif" font-size="16" fill="#8FA37F" opacity="0.5">healthwelltech21</text>
+</svg>

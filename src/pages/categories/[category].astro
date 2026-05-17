@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const categoryMap: Record<string, string> = {
+  'clean-beauty': 'Clean Beauty',
+  'gentle-wellness': 'Gentle Wellness',
+  'organic-pantry': 'Organic Pantry',
+  'endo-friendly-living': 'Endo-Friendly Living',
+  'slow-living': 'Slow Living',
+  'smart-home': 'Smart Home',
+};
+
+export async function getStaticPaths() {
+  return [
+    { params: { category: 'clean-beauty' } },
+    { params: { category: 'gentle-wellness' } },
+    { params: { category: 'organic-pantry' } },
+    { params: { category: 'endo-friendly-living' } },
+    { params: { category: 'slow-living' } },
+    { params: { category: 'smart-home' } },
+  ];
+}
+
+const { category } = Astro.params;
+const displayName = categoryMap[category] || category;
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts
+  .filter((post) => post.data.category === displayName)
+  .sort((a, b) => new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime());
+---
+
+<BaseLayout title={displayName} description={`Browse all ${displayName} posts on healthwelltech21.`}>
+  <Header slot="header" />
+
+  <section class="category-page">
+    <div class="category-page__container">
+      <h1 class="category-page__title">{displayName}</h1>
+      <p class="category-page__count">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
+
+      {posts.length > 0 ? (
+        <div class="category-page__grid">
+          {posts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              slug={post.id}
+              category={post.data.category}
+              excerpt={post.data.description}
+              date={post.data.publishedDate}
+              heroImage={post.data.heroImage}
+              heroAlt={post.data.heroAlt}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="category-page__empty">No posts in this category yet. Check back soon!</p>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .category-page {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .category-page__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .category-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .category-page__count {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--stone);
+    margin: 0 0 var(--space-7) 0;
+  }
+
+  .category-page__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .category-page__empty {
+    font-family: var(--font-body);
+    color: var(--stone);
+    font-size: 1rem;
+    text-align: center;
+    padding: var(--space-7) 0;
+  }
+
+  @media (max-width: 900px) {
+    .category-page__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .category-page {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .category-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="About" description="Meet Lucky — the woman behind healthwelltech21. Endo warrior, clean-living advocate, and former Salesforce professional turned AI enthusiast.">
+  <Header slot="header" />
+
+  <section class="about">
+    <div class="about__container">
+      <div class="about__layout">
+        <div class="about__photo">
+          <div class="about__photo-placeholder" aria-label="Photo of Lucky">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="about__content">
+          <h1 class="about__title">Hi, I'm Lucky.</h1>
+
+          <p class="about__intro">I started healthwelltech21 because I needed a place like this to exist and couldn't find one.</p>
+
+          <p>After years of living with endometriosis, I became obsessed with understanding what I was putting in and on my body. Not in a fearful way — in an empowered way. I wanted to know which ingredients were worth avoiding, which products actually delivered, and which wellness trends were backed by real evidence versus just beautiful packaging.</p>
+
+          <p>I live in the DC/Virginia area with my partner, and by day I work in tech. I spent years in the Salesforce ecosystem before transitioning into AI and automation. That analytical background is baked into everything I write here — I read the studies, check the claims, and give you the bottom line without the fluff.</p>
+
+          <p>This blog is where my two worlds meet: the slow, intentional living I crave and the research-driven approach I can't turn off. Every product recommendation is something I've personally used. Every wellness suggestion is grounded in evidence. And every post is written with the assumption that you're smart enough to make your own choices — you just want clear information to make them with.</p>
+
+          <h2 class="about__subheading">What you'll find here</h2>
+
+          <ul class="about__list">
+            <li>Clean beauty reviews with ingredient breakdowns</li>
+            <li>Endo-friendly living guides (anti-inflammatory pantry, hormone support, pain management)</li>
+            <li>Gentle wellness practices that don't require a $200 supplement stack</li>
+            <li>Organic pantry staples that taste good and won't break the bank</li>
+            <li>Slow living tips for people with busy lives</li>
+            <li>Smart home picks that actually simplify your routine</li>
+          </ul>
+
+          <h2 class="about__subheading">Where to start</h2>
+
+          <p>If you're new, check out the <a href="/start-here">Start Here</a> page for a curated intro to the best of the blog. Or explore by category:</p>
+
+          <div class="about__categories">
+            <a href="/categories/clean-beauty">Clean Beauty</a>
+            <a href="/categories/gentle-wellness">Gentle Wellness</a>
+            <a href="/categories/organic-pantry">Organic Pantry</a>
+            <a href="/categories/endo-friendly-living">Endo-Friendly Living</a>
+            <a href="/categories/slow-living">Slow Living</a>
+            <a href="/categories/smart-home">Smart Home</a>
+          </div>
+
+          <p class="about__closing">Thanks for being here. I genuinely hope something I write makes your days a little easier, a little cleaner, or a little more intentional.</p>
+
+          <p class="about__sign-off">— Lucky</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .about {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .about__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
+  .about__photo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about__photo-placeholder {
+    width: 240px;
+    height: 300px;
+    background: var(--cream);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sage-deep);
+    border: 1px solid var(--sage-soft);
+  }
+
+  .about__content {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+  }
+
+  .about__content p {
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .about__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .about__intro {
+    font-size: 1.1875rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .about__subheading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--space-7) 0 var(--space-4) 0;
+  }
+
+  .about__list {
+    margin: 0 0 var(--space-5) 0;
+    padding-left: var(--space-5);
+  }
+
+  .about__list li {
+    margin-bottom: var(--space-2);
+  }
+
+  .about__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 var(--space-5) 0;
+  }
+
+  .about__categories a {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--sage-soft);
+    border-radius: 24px;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: all 200ms ease;
+  }
+
+  .about__categories a:hover {
+    border-color: var(--sage-deep);
+    color: var(--sage-deep);
+  }
+
+  .about__content a:not(.about__categories a) {
+    color: var(--terracotta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .about__closing {
+    margin-top: var(--space-6);
+  }
+
+  .about__sign-off {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--sage-deep);
+    margin-top: var(--space-5);
+  }
+
+  @media (max-width: 768px) {
+    .about {
+      padding: var(--space-7) var(--space-4);
+    }
+  }
+</style>

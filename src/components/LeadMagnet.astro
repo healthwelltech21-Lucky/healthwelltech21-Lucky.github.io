@@ -1,0 +1,99 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pdfUrl: string;
+}
+
+const { title, description, pdfUrl } = Astro.props;
+---
+
+<div class="lead-magnet">
+  <div class="lead-magnet__icon" aria-hidden="true">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  </div>
+  <div class="lead-magnet__content">
+    <h3 class="lead-magnet__title">{title}</h3>
+    <p class="lead-magnet__description">{description}</p>
+    <a href={pdfUrl} class="lead-magnet__cta">Download Free PDF</a>
+  </div>
+</div>
+
+<style>
+  .lead-magnet {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+    border: 1px solid var(--sage-soft);
+    border-left: 4px solid;
+    border-image: linear-gradient(to bottom, var(--clay), var(--cream)) 1;
+    border-radius: 8px;
+    background: var(--ivory);
+    padding: var(--space-6);
+    margin: var(--space-5) 0;
+  }
+
+  @media (max-width: 480px) {
+    .lead-magnet {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .lead-magnet__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--sage-whisper);
+    border-radius: 50%;
+    color: var(--sage-deep);
+  }
+
+  .lead-magnet__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .lead-magnet__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .lead-magnet__description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .lead-magnet__cta {
+    display: inline-block;
+    background: var(--sage-deep);
+    color: var(--ivory);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 4px;
+    transition: opacity var(--duration-default) var(--ease-default);
+  }
+
+  .lead-magnet__cta:hover {
+    opacity: 0.9;
+  }
+</style>

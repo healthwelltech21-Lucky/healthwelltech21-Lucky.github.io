@@ -1,0 +1,188 @@
+---
+interface Props {
+  variant?: 'inline' | 'popup' | 'sticky';
+}
+
+const { variant = 'inline' } = Astro.props;
+---
+
+<!-- TODO: Replace Kit form ID after signup -->
+<div class:list={['newsletter', `newsletter--${variant}`]} data-variant={variant}>
+  {variant === 'popup' && <div class="newsletter__backdrop" data-newsletter-close></div>}
+  <div class="newsletter__inner">
+    {variant === 'popup' && (
+      <button class="newsletter__close" data-newsletter-close aria-label="Close newsletter popup">&times;</button>
+    )}
+    <h2 class="newsletter__headline">Get the free guide</h2>
+    <p class="newsletter__subtext">Join 2,000+ women getting weekly clean-living picks</p>
+    <form
+      action="https://app.kit.com/forms/REPLACE_ME"
+      method="post"
+      class="newsletter__form"
+    >
+      <!-- TODO: replace REPLACE_ME with your Kit form ID -->
+      <label for={`newsletter-email-${variant}`} class="sr-only">Email address</label>
+      <input
+        type="email"
+        id={`newsletter-email-${variant}`}
+        name="email_address"
+        placeholder="Your email address"
+        required
+        class="newsletter__input"
+      />
+      <button type="submit" class="newsletter__submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .newsletter--inline {
+    border: 1px solid var(--sage-soft);
+    border-radius: 8px;
+    background: var(--ivory);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+  }
+
+  .newsletter--popup {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newsletter--popup[data-open] {
+    display: flex;
+  }
+
+  .newsletter__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .newsletter--popup .newsletter__inner {
+    position: relative;
+    background: var(--ivory);
+    border: 1px solid var(--sage-soft);
+    border-radius: 8px;
+    padding: var(--space-7);
+    max-width: 440px;
+    width: 90%;
+    z-index: 1;
+  }
+
+  .newsletter--sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    background: var(--ivory);
+    border-top: 1px solid var(--sage-soft);
+    padding: var(--space-4) var(--space-5);
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter--sticky {
+      display: block;
+    }
+  }
+
+  .newsletter__close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--stone);
+    cursor: pointer;
+    line-height: 1;
+    padding: var(--space-1);
+  }
+
+  .newsletter__headline {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .newsletter__subtext {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--stone);
+    margin: 0 0 var(--space-4) 0;
+    line-height: 1.5;
+  }
+
+  .newsletter__form {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .newsletter__input {
+    flex: 1;
+    min-width: 200px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--sage-soft);
+    border-radius: 4px;
+    background: white;
+    color: var(--charcoal);
+    transition: border-color var(--duration-default) var(--ease-default);
+  }
+
+  .newsletter__input:focus {
+    outline: none;
+    border-color: var(--terracotta);
+    box-shadow: 0 0 0 2px rgba(184, 101, 74, 0.2);
+  }
+
+  .newsletter__submit {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--sage-deep);
+    color: var(--ivory);
+    border: none;
+    border-radius: 4px;
+    padding: var(--space-3) var(--space-5);
+    cursor: pointer;
+    transition: opacity var(--duration-default) var(--ease-default);
+  }
+
+  .newsletter__submit:hover {
+    opacity: 0.9;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-newsletter-close]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const popup = el.closest('.newsletter--popup');
+      if (popup) popup.removeAttribute('data-open');
+    });
+  });
+</script>

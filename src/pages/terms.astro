@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Terms of Use" description="Terms of use for healthwelltech21.">
+  <Header slot="header" />
+
+  <section class="legal-page">
+    <div class="legal-page__container">
+      <h1 class="legal-page__title">Terms of Use</h1>
+      <p class="legal-page__updated">Last updated: May 2026</p>
+
+      <div class="legal-page__content">
+        <h2>Agreement to terms</h2>
+        <p>By accessing and using healthwelltech21 (the "Site"), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the Site.</p>
+
+        <h2>Content disclaimer</h2>
+        <p>The information provided on this Site is for general informational and educational purposes only. It is not intended as, and should not be considered, medical advice, professional health guidance, or a substitute for consultation with a qualified healthcare provider.</p>
+        <p>Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition, including endometriosis or any other health concern discussed on this Site.</p>
+
+        <h2>Product recommendations</h2>
+        <p>Product reviews and recommendations on this Site reflect my personal experience and opinions. Results may vary. I am not responsible for the efficacy, safety, or quality of any third-party product linked or discussed on this Site.</p>
+
+        <h2>Affiliate links</h2>
+        <p>This Site contains affiliate links. Please see the <a href="/disclosure">Affiliate Disclosure</a> for full details. Clicking on affiliate links and making purchases is entirely voluntary.</p>
+
+        <h2>Intellectual property</h2>
+        <p>All content on this Site — including text, images, graphics, and design — is the property of healthwelltech21 unless otherwise noted. You may not reproduce, distribute, or republish any content from this Site without written permission.</p>
+        <p>You are welcome to share links to posts and pin images to Pinterest with proper attribution.</p>
+
+        <h2>User conduct</h2>
+        <p>When interacting with this Site (including contact forms and comments), you agree not to:</p>
+        <ul>
+          <li>Submit false or misleading information</li>
+          <li>Attempt to disrupt or interfere with the Site's functionality</li>
+          <li>Use the Site for any unlawful purpose</li>
+          <li>Scrape, harvest, or collect data from the Site without permission</li>
+        </ul>
+
+        <h2>External links</h2>
+        <p>This Site may contain links to external websites. I am not responsible for the content, privacy practices, or availability of those sites. Linking to an external site does not imply endorsement of all content on that site.</p>
+
+        <h2>Limitation of liability</h2>
+        <p>healthwelltech21 and its author (Lucky) shall not be liable for any damages arising from your use of the Site, including but not limited to direct, indirect, incidental, or consequential damages. Use of this Site is at your own risk.</p>
+
+        <h2>Changes to these terms</h2>
+        <p>I reserve the right to update these Terms of Use at any time. Changes will be posted on this page with an updated date. Continued use of the Site after changes constitutes acceptance of the new terms.</p>
+
+        <h2>Contact</h2>
+        <p>If you have questions about these terms, please <a href="/contact">get in touch</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .legal-page__container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .legal-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .legal-page__updated {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--stone);
+    margin: 0 0 var(--space-7) 0;
+  }
+
+  .legal-page__content {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+  }
+
+  .legal-page__content h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--space-7) 0 var(--space-3) 0;
+  }
+
+  .legal-page__content p {
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .legal-page__content ul {
+    margin: 0 0 var(--space-4) 0;
+    padding-left: var(--space-5);
+  }
+
+  .legal-page__content li {
+    margin-bottom: var(--space-2);
+  }
+
+  .legal-page__content a {
+    color: var(--terracotta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: var(--space-7) var(--space-4);
+    }
+  }
+</style>

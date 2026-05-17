@@ -1,0 +1,57 @@
+---
+interface Props {
+  pillarTitle: string;
+  pillarUrl: string;
+  category: string;
+}
+
+const { pillarTitle, pillarUrl, category } = Astro.props;
+---
+
+<div class="pillar-banner">
+  <p class="pillar-banner__text">
+    Part of our {category} guide: <a href={pillarUrl} class="pillar-banner__link">{pillarTitle}</a>
+  </p>
+  <svg class="pillar-banner__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+</div>
+
+<style>
+  .pillar-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    background: var(--sage-whisper);
+    border-left: 3px solid var(--terracotta);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-5);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .pillar-banner__text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .pillar-banner__link {
+    color: var(--sage-deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .pillar-banner__link:hover {
+    color: var(--terracotta);
+  }
+
+  .pillar-banner__arrow {
+    flex-shrink: 0;
+    color: var(--sage-deep);
+  }
+</style>

@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Privacy Policy" description="Privacy policy for healthwelltech21 — how we handle your data, analytics, and email subscriptions.">
+  <Header slot="header" />
+
+  <section class="legal-page">
+    <div class="legal-page__container">
+      <h1 class="legal-page__title">Privacy Policy</h1>
+      <p class="legal-page__updated">Last updated: May 2026</p>
+
+      <div class="legal-page__content">
+        <h2>Overview</h2>
+        <p>Your privacy matters to me. This policy explains what information healthwelltech21 collects, how it's used, and how it's protected. I keep things simple and don't collect more than I need.</p>
+
+        <h2>Information I collect</h2>
+
+        <h3>Analytics</h3>
+        <p>This site uses privacy-focused analytics (Plausible Analytics) to understand how visitors use the site. Plausible does not use cookies, does not track you across sites, and does not collect personal data. The data collected includes page views, referral sources, browser type, and country — all in aggregate, never tied to you as an individual.</p>
+
+        <h3>Email subscriptions</h3>
+        <p>If you subscribe to the newsletter, I collect your email address through Kit (formerly ConvertKit). Your email is used solely to send you the content you signed up for — blog updates, free guides, and occasional recommendations. I never sell, rent, or share your email with third parties.</p>
+        <p>You can unsubscribe at any time using the link at the bottom of every email.</p>
+
+        <h3>Contact form</h3>
+        <p>If you reach out via the contact form, I receive your name, email address, and message. This information is used only to respond to your inquiry and is not stored beyond what's needed for our communication.</p>
+
+        <h2>Cookies</h2>
+        <p>healthwelltech21 does not use tracking cookies. If third-party embeds (such as YouTube videos or Pinterest pins) are present on a page, those services may set their own cookies according to their own privacy policies.</p>
+
+        <h2>Affiliate links</h2>
+        <p>This site contains affiliate links (see my <a href="/disclosure">Affiliate Disclosure</a>). When you click an affiliate link, the destination site (such as Amazon) may track your visit using their own cookies. I do not have access to any personal data about your purchases.</p>
+
+        <h2>Third-party services</h2>
+        <p>This site may use the following third-party services:</p>
+        <ul>
+          <li><strong>Plausible Analytics</strong> — privacy-focused website analytics</li>
+          <li><strong>Kit (ConvertKit)</strong> — email marketing and newsletter delivery</li>
+          <li><strong>Amazon Associates</strong> — affiliate product links</li>
+          <li><strong>GitHub Pages / Vercel</strong> — website hosting</li>
+        </ul>
+        <p>Each of these services has its own privacy policy governing how they handle data.</p>
+
+        <h2>Children's privacy</h2>
+        <p>This site is not directed at children under the age of 13. I do not knowingly collect personal information from children.</p>
+
+        <h2>Your rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+          <li>Unsubscribe from emails at any time</li>
+          <li>Request deletion of any personal data I hold about you</li>
+          <li>Ask what data (if any) I have associated with your email</li>
+        </ul>
+        <p>To exercise any of these rights, please <a href="/contact">contact me</a>.</p>
+
+        <h2>Changes to this policy</h2>
+        <p>I may update this privacy policy from time to time. Any changes will be reflected on this page with an updated "Last updated" date.</p>
+
+        <h2>Contact</h2>
+        <p>If you have questions about this privacy policy, please reach out via the <a href="/contact">contact page</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .legal-page__container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .legal-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .legal-page__updated {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--stone);
+    margin: 0 0 var(--space-7) 0;
+  }
+
+  .legal-page__content {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+  }
+
+  .legal-page__content h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--space-7) 0 var(--space-3) 0;
+  }
+
+  .legal-page__content h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--space-5) 0 var(--space-2) 0;
+  }
+
+  .legal-page__content p {
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .legal-page__content ul {
+    margin: 0 0 var(--space-4) 0;
+    padding-left: var(--space-5);
+  }
+
+  .legal-page__content li {
+    margin-bottom: var(--space-2);
+  }
+
+  .legal-page__content a {
+    color: var(--terracotta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: var(--space-7) var(--space-4);
+    }
+  }
+</style>

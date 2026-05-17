@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+import CategoryTile from '../components/CategoryTile.astro';
+import Newsletter from '../components/Newsletter.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts
+  .sort((a, b) => new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime())
+  .slice(0, 5);
+
+const categories = [
+  { name: 'Clean Beauty', slug: 'clean-beauty', image: '/images/categories/clean-beauty.jpg' },
+  { name: 'Gentle Wellness', slug: 'gentle-wellness', image: '/images/categories/gentle-wellness.jpg' },
+  { name: 'Organic Pantry', slug: 'organic-pantry', image: '/images/categories/organic-pantry.jpg' },
+  { name: 'Endo-Friendly Living', slug: 'endo-friendly-living', image: '/images/categories/endo-friendly-living.jpg' },
+  { name: 'Slow Living', slug: 'slow-living', image: '/images/categories/slow-living.jpg' },
+  { name: 'Smart Home', slug: 'smart-home', image: '/images/categories/smart-home.jpg' },
+];
+---
+
+<BaseLayout title="Home" description="Slow living, clean choices, gentle wellness. Evidence-based guides for women navigating endometriosis, clean beauty, and intentional living.">
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__container">
+      <h1 class="hero__tagline">Slow living, clean choices, gentle wellness.</h1>
+      <p class="hero__intro">Evidence-based guides for women navigating endometriosis, clean beauty, and intentional living. Less noise, more clarity.</p>
+    </div>
+  </section>
+
+  <!-- Editorial Grid -->
+  <section class="editorial">
+    <div class="editorial__container">
+      <h2 class="editorial__heading">Latest</h2>
+      {posts.length > 0 ? (
+        <div class="editorial__grid">
+          {posts[0] && (
+            <div class="editorial__featured">
+              <PostCard
+                title={posts[0].data.title}
+                slug={posts[0].id}
+                category={posts[0].data.category}
+                excerpt={posts[0].data.description}
+                date={posts[0].data.publishedDate}
+                heroImage={posts[0].data.heroImage}
+                heroAlt={posts[0].data.heroAlt}
+                featured={true}
+              />
+            </div>
+          )}
+          <div class="editorial__stack">
+            {posts[1] && (
+              <PostCard
+                title={posts[1].data.title}
+                slug={posts[1].id}
+                category={posts[1].data.category}
+                excerpt={posts[1].data.description}
+                date={posts[1].data.publishedDate}
+                heroImage={posts[1].data.heroImage}
+                heroAlt={posts[1].data.heroAlt}
+              />
+            )}
+            {posts[2] && (
+              <PostCard
+                title={posts[2].data.title}
+                slug={posts[2].id}
+                category={posts[2].data.category}
+                excerpt={posts[2].data.description}
+                date={posts[2].data.publishedDate}
+                heroImage={posts[2].data.heroImage}
+                heroAlt={posts[2].data.heroAlt}
+              />
+            )}
+          </div>
+          {posts[3] && (
+            <div class="editorial__bottom-left">
+              <PostCard
+                title={posts[3].data.title}
+                slug={posts[3].id}
+                category={posts[3].data.category}
+                excerpt={posts[3].data.description}
+                date={posts[3].data.publishedDate}
+                heroImage={posts[3].data.heroImage}
+                heroAlt={posts[3].data.heroAlt}
+              />
+            </div>
+          )}
+          {posts[4] && (
+            <div class="editorial__bottom-right">
+              <PostCard
+                title={posts[4].data.title}
+                slug={posts[4].id}
+                category={posts[4].data.category}
+                excerpt={posts[4].data.description}
+                date={posts[4].data.publishedDate}
+                heroImage={posts[4].data.heroImage}
+                heroAlt={posts[4].data.heroAlt}
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <p class="editorial__empty">Posts coming soon. Stay tuned!</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <div class="categories__container">
+      <h2 class="categories__heading">Explore by Topic</h2>
+      <div class="categories__grid">
+        {categories.map((cat) => (
+          <CategoryTile name={cat.name} slug={cat.slug} image={cat.image} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter-section">
+    <div class="newsletter-section__container">
+      <Newsletter />
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-9) var(--space-5);
+    text-align: center;
+    background: var(--cream);
+  }
+
+  .hero__container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--sage-deep);
+    margin: 0 0 var(--space-4) 0;
+    line-height: 1.2;
+  }
+
+  .hero__intro {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin: 0;
+    max-width: 560px;
+    margin-inline: auto;
+  }
+
+  .editorial {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .editorial__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .editorial__heading,
+  .categories__heading {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-6) 0;
+  }
+
+  .editorial__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-5);
+  }
+
+  .editorial__featured {
+    grid-column: 1 / 8;
+  }
+
+  .editorial__stack {
+    grid-column: 8 / 13;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .editorial__bottom-left {
+    grid-column: 1 / 6;
+  }
+
+  .editorial__bottom-right {
+    grid-column: 7 / 13;
+    margin-top: 64px;
+  }
+
+  .editorial__empty {
+    font-family: var(--font-body);
+    color: var(--stone);
+    font-size: 1rem;
+  }
+
+  .categories {
+    padding: var(--space-9) var(--space-5);
+    background: var(--ivory);
+  }
+
+  .categories__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .categories__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .newsletter-section {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .newsletter-section__container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .editorial {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .editorial__grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .editorial__bottom-right {
+      margin-top: 0;
+    }
+
+    .categories {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .categories__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .newsletter-section {
+      padding: var(--space-7) var(--space-4);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .categories__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

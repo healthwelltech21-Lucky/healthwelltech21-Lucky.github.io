@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+---
+
+<BaseLayout title="Start Here" description="New to healthwelltech21? Start here for the best guides on clean beauty, endo-friendly living, and gentle wellness.">
+  <Header slot="header" />
+
+  <section class="start-here">
+    <div class="start-here__container">
+      <h1 class="start-here__title">Start Here</h1>
+      <p class="start-here__intro">New here? Welcome. This page is your roadmap to the best of healthwelltech21 — curated by topic so you can dive into whatever matters most to you right now.</p>
+
+      <!-- Essential Reads -->
+      <div class="start-here__section">
+        <h2 class="start-here__heading">New here? Start with these</h2>
+        <p class="start-here__desc">These posts give you the foundation of everything we talk about on this blog.</p>
+        <ul class="start-here__list">
+          <li><a href="/blog/">The Beginner's Guide to Clean Beauty (Coming Soon)</a></li>
+          <li><a href="/blog/">Anti-Inflammatory Eating 101 (Coming Soon)</a></li>
+          <li><a href="/blog/">What I Wish I Knew When I Was Diagnosed with Endo (Coming Soon)</a></li>
+          <li><a href="/blog/">Slow Living When You Have a Full-Time Job (Coming Soon)</a></li>
+        </ul>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="start-here__section">
+        <h2 class="start-here__heading">Explore by category</h2>
+
+        <div class="start-here__categories">
+          <div class="start-here__category">
+            <h3><a href="/categories/clean-beauty">Clean Beauty</a></h3>
+            <p>Ingredient breakdowns, product reviews, and swap guides. I test everything myself and tell you what's actually worth the price tag.</p>
+          </div>
+
+          <div class="start-here__category">
+            <h3><a href="/categories/gentle-wellness">Gentle Wellness</a></h3>
+            <p>Evidence-based wellness that doesn't require a guru or a supplement subscription. Think: nervous system support, sleep hygiene, and stress management.</p>
+          </div>
+
+          <div class="start-here__category">
+            <h3><a href="/categories/organic-pantry">Organic Pantry</a></h3>
+            <p>Affordable organic staples, anti-inflammatory recipes, and honest reviews of pantry products. Real food for real budgets.</p>
+          </div>
+
+          <div class="start-here__category">
+            <h3><a href="/categories/endo-friendly-living">Endo-Friendly Living</a></h3>
+            <p>Living well with endometriosis. Hormone-supportive nutrition, pain management tools, and lifestyle adjustments that actually help.</p>
+          </div>
+
+          <div class="start-here__category">
+            <h3><a href="/categories/slow-living">Slow Living</a></h3>
+            <p>Intentional routines, digital minimalism, and seasonal rhythms. Making space for what matters without dropping out of modern life.</p>
+          </div>
+
+          <div class="start-here__category">
+            <h3><a href="/categories/smart-home">Smart Home</a></h3>
+            <p>Tech that simplifies your daily routine. Air purifiers, water filters, and smart devices that support a cleaner home environment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lead Magnet CTA -->
+      <div class="start-here__section">
+        <h2 class="start-here__heading">Grab a free guide</h2>
+        <LeadMagnet
+          title="The Endo-Friendly Anti-Inflammatory Pantry Checklist"
+          description="28 affordable staples under $20 that support hormone balance and reduce inflammation. A 4-page PDF you can stick on your fridge."
+          pdfUrl="/free"
+        />
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .start-here {
+    padding: var(--space-9) var(--space-5);
+  }
+
+  .start-here__container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .start-here__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .start-here__intro {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-8) 0;
+  }
+
+  .start-here__section {
+    margin-bottom: var(--space-8);
+  }
+
+  .start-here__heading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .start-here__desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--stone);
+    margin: 0 0 var(--space-4) 0;
+    line-height: 1.6;
+  }
+
+  .start-here__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .start-here__list li {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--sage-soft);
+  }
+
+  .start-here__list a {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  .start-here__list a:hover {
+    color: var(--terracotta);
+  }
+
+  .start-here__categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .start-here__category {
+    padding: var(--space-5);
+    border: 1px solid var(--sage-soft);
+    border-radius: 8px;
+    background: var(--ivory);
+  }
+
+  .start-here__category h3 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .start-here__category h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .start-here__category h3 a:hover {
+    color: var(--terracotta);
+  }
+
+  .start-here__category p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .start-here {
+      padding: var(--space-7) var(--space-4);
+    }
+
+    .start-here__categories {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
