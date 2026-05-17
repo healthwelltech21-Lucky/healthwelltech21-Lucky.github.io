@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://healthwelltech21-lucky.github.io',
+  site: 'https://healthwelltech21.com',
   base: '/',
   vite: {
     plugins: [tailwindcss()]
